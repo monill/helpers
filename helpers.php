@@ -108,3 +108,30 @@ if (!function_exists('diaMesAno')) {
         return strftime('%A, %d de %B de %Y', strtotime('today'));
     }
 }
+
+if (!function_exists('ytVideo')) {
+    function ytVideo() {
+        if ($this->video1 != null) {
+            $url = $this->video1;
+
+            if ($this->checkUrl($url)) {
+                $fetch = explode("v=", $url);
+                $videoId = $fetch[1];
+
+                return $this->videoImage($videoId);
+            }
+        }
+    }
+}
+
+if (!function_exists('videoImage')) {
+    function videoImage($videoId) {
+        if ($this->checkUrl('https://i.ytimg.com/vi/' . $videoId . '/maxresdefault.jpg')) {
+            return 'https://i.ytimg.com/vi/' . $videoId . '/maxresdefault.jpg';
+        } elseif ($this->checkUrl('https://img.youtube.com/vi/' . $videoId . '/maxresdefault.jpg"')) {
+            return 'https://img.youtube.com/vi/' . $videoId . '/maxresdefault.jpg"';
+        } else {
+            return asset('site/assets/images/no-image-found.png');
+        }
+    }
+}
