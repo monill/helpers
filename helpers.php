@@ -135,3 +135,11 @@ if (!function_exists('videoImage')) {
         }
     }
 }
+
+//gerar arquivos de 100k em 100k
+$filename = 'arquivo.{{id}}.txt';
+
+for ($i=100000; $i<=2000000; $i+=100000) {
+    // str_replace('{{id}}', $i, $filename);
+    echo touch(str_replace('{{id}}', $i, $filename)) . '<br>';
+}
