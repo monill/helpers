@@ -143,3 +143,18 @@ for ($i=100000; $i<=2000000; $i+=100000) {
     // str_replace('{{id}}', $i, $filename);
     echo touch(str_replace('{{id}}', $i, $filename)) . '<br>';
 }
+
+if (!function_exists('url')) {
+    function url($link)
+    {
+        $url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        return $url . "/$link";
+    }
+}
+if (!function_exists('asset')) {
+    function asset($file)
+    {
+        $url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        return $url . "/$file";
+    }
+}
