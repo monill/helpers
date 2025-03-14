@@ -1,2 +1,4 @@
-SQLAlchemy
+sqlalchemy
 inflect
+mysql-connector-python
+pymysql
