@@ -58,7 +58,11 @@ conn = engine.connect()
 
 # Obter metadados do banco de dados
 metadata = MetaData()
-metadata.reflect(bind=engine)
+try:
+    metadata.reflect(bind=engine)
+    print("Tabelas carregadas:", metadata.tables.keys())
+except Exception as e:
+    print("Erro ao carregar metadados:", e)
 
 # Gerar arquivos de migração
 p = inflect_engine()
@@ -74,9 +78,9 @@ for table_name, table in metadata.tables.items():
 
     with open(migration_file_name, 'w') as migration_file:
         migration_file.write("<?php\n\n")
-        migration_file.write(f"use Illuminate\Support\Facades\Schema;\n")
-        migration_file.write(f"use Illuminate\Database\Schema\Blueprint;\n")
-        migration_file.write(f"use Illuminate\Database\Migrations\Migration;\n\n")
+        migration_file.write(r"use Illuminate\Support\Facades\Schema;\n")
+        migration_file.write(r"use Illuminate\Database\Schema\Blueprint;\n")
+        migration_file.write(r"use Illuminate\Database\Migrations\Migration;\n\n")
         migration_file.write(f"class Create{table_name_singular.title()}Table extends Migration\n")
         migration_file.write("{\n")
         migration_file.write(f"    public function up()\n")
